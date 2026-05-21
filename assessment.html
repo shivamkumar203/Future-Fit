@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Assessment - Career Counseling Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 20%;
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.8rem;
+            color: #666;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .content {
+            padding: 2.5rem 2rem;
+        }
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question {
+            margin-bottom: 2.5rem;
+        }
+
+        .question h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .options {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 1.2rem;
+            transform: scale(1.3);
+            accent-color: #667eea;
+        }
+
+        .option span {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        .result-container.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .result-icon {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .result-container h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-container > p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .career-recommendations {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+            text-align: left;
+        }
+
+        .career-card {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .career-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .career-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .career-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .career-list {
+            color: #495057;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .match-percentage {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .home-btn {
+            margin-top: 2.5rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .home-btn:hover {
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Mobile Devices (320px - 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .progress-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .content {
+                padding: 1.5rem 1rem;
+            }
+
+            .question h3 {
+                font-size: 1.2rem;
+                text-align: left;
+            }
+
+            .option {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .option input[type="radio"] {
+                margin: 0;
+                transform: scale(1.1);
+            }
+
+            .option span {
+                font-size: 0.95rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .result-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .result-container h2 {
+                font-size: 1.8rem;
+            }
+
+            .result-icon {
+                font-size: 3.5rem;
+            }
+
+            .career-card {
+                padding: 1.5rem;
+            }
+
+            .match-percentage {
+                position: static;
+                display: inline-block;
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Tablet Devices (768px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 750px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .question h3 {
+                font-size: 1.4rem;
+            }
+
+            .options {
+                gap: 1rem;
+            }
+
+            .option {
+                padding: 1.1rem;
+            }
+
+            .career-recommendations {
+                gap: 1.2rem;
+            }
+        }
+
+        /* Large Screens (1024px+) */
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 1000px;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .content {
+                padding: 3rem 2.5rem;
+            }
+
+            .question h3 {
+                font-size: 1.6rem;
+            }
+
+            .career-recommendations {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        /* Extra Large Screens (1440px+) */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1200px;
+            }
+
+            .content {
+                padding: 3.5rem 3rem;
+            }
+
+            .header h1 {
+                font-size: 3rem;
+            }
+
+            .question h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">◀</a>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Career Assessment</h1>
+            <p>Discover your ideal career path through our smart 5-question assessment</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span>
+            </div>
+        </div>
+
+        <div class="content" id="assessmentContent">
+            <!-- Questions will be generated by JavaScript -->
+        </div>
+
+        <!-- Results Container -->
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon">🎉</div>
+            <h2>Your Career Assessment Results</h2>
+            <p>Based on your responses, here are your personalized career recommendations:</p>
+            
+            <div class="career-recommendations" id="careerRecommendations">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+
+            <button class="btn home-btn" onclick="window.location.href='index.html'">
+                🏠 Back to Home
+            </button>
+        </div>
+    </div>
+
+   <script>
+    // --- ⭐ NEW: Get User and Token from localStorage ---
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    const token = localStorage.getItem('token');
+
+    // Assessment Questions
+    const questions = [
+        {
+            id: 1,
+            type: 'primary_interest',
+            question: "What type of work activities genuinely excite and motivate you?",
+            options: [
+                { value: 'tech_innovation', text: 'Creating technology solutions, coding, and innovation' },
+                { value: 'people_health', text: 'Helping people, healthcare, and improving lives' },
+                { value: 'business_growth', text: 'Business strategy, leadership, and driving growth' },
+                { value: 'creative_design', text: 'Artistic creation, design, and visual expression' },
+                { value: 'education_research', text: 'Teaching, research, and knowledge sharing' }
+            ]
+        },
+        {
+            id: 2,
+            type: 'work_style',
+            question: "How do you prefer to approach problems and challenges?",
+            options: [
+                { value: 'analytical_systematic', text: 'Analyze data, use logic, and systematic approaches' },
+                { value: 'collaborative_empathetic', text: 'Work with others, understand different perspectives' },
+                { value: 'strategic_leadership', text: 'Take charge, make decisions, and lead teams' },
+                { value: 'creative_innovative', text: 'Think outside the box and find unique solutions' },
+                { value: 'research_methodical', text: 'Research thoroughly and use proven methods' }
+            ]
+        },
+        {
+            id: 3,
+            type: 'core_skills',
+            question: "Which of these best describes your strongest natural abilities?",
+            options: [
+                { value: 'technical_logical', text: 'Technical skills, programming, and logical thinking' },
+                { value: 'interpersonal_caring', text: 'Communication, empathy, and helping others' },
+                { value: 'leadership_business', text: 'Leadership, negotiation, and business acumen' },
+                { value: 'artistic_creative', text: 'Creativity, design sense, and artistic vision' },
+                { value: 'analytical_research', text: 'Research, analysis, and academic thinking' }
+            ]
+        },
+        {
+            id: 4,
+            type: 'work_environment',
+            question: "What type of work environment would make you most productive?",
+            options: [
+                { value: 'tech_modern', text: 'Modern tech office with latest tools and equipment' },
+                { value: 'healthcare_service', text: 'Healthcare setting focused on helping people' },
+                { value: 'corporate_dynamic', text: 'Dynamic corporate environment with growth opportunities' },
+                { value: 'creative_flexible', text: 'Creative studio with flexible, artistic atmosphere' },
+                { value: 'academic_quiet', text: 'Quiet academic or research environment' }
+            ]
+        },
+        {
+            id: 5,
+            type: 'career_goals',
+            question: "What kind of long-term impact do you want to make in your career?",
+            options: [
+                { value: 'tech_advancement', text: 'Advance technology and solve complex technical problems' },
+                { value: 'health_lives', text: 'Improve health, save lives, and enhance well-being' },
+                { value: 'business_success', text: 'Build successful businesses and drive economic growth' },
+                { value: 'cultural_artistic', text: 'Influence culture, inspire others, and create beauty' },
+                { value: 'knowledge_education', text: 'Expand knowledge and educate future generations' }
+            ]
+        }
+    ];
+
+    // Career Paths (No changes)
+    const careerPaths = {
+        technology: {
+            name: "Technology & Software Development",
+            careers: ["Software Engineer", "Data Scientist", "Cybersecurity Specialist", "AI/ML Engineer", "Full-Stack Developer", "DevOps Engineer"],
+            description: "Build innovative software solutions, work with cutting-edge technology, and solve complex technical challenges in the digital world.",
+            growth: "High growth potential with excellent salary prospects"
+        },
+        healthcare: {
+            name: "Healthcare & Medical Sciences",
+            careers: ["Doctor", "Nurse", "Medical Researcher", "Healthcare Administrator", "Physical Therapist", "Public Health Specialist"],
+            description: "Make a direct impact on people's lives through healthcare, medical treatment, and health improvement initiatives.",
+            growth: "Stable career with high job security and meaningful work"
+        },
+        business: {
+            name: "Business & Management",
+            careers: ["Business Analyst", "Project Manager", "Marketing Manager", "Financial Advisor", "Entrepreneur", "Operations Manager"],
+            description: "Drive business growth, manage teams, make strategic decisions, and build successful organizations in various industries.",
+            growth: "Excellent leadership opportunities with high earning potential"
+        },
+        creative: {
+            name: "Creative Arts & Design",
+            careers: ["Graphic Designer", "UX/UI Designer", "Content Creator", "Architect", "Marketing Creative", "Digital Artist"],
+            description: "Express creativity, design beautiful and functional solutions, and bring artistic visions to life across multiple media.",
+            growth: "Growing digital creative economy with diverse opportunities"
+        },
+        education: {
+            name: "Education & Research",
+            careers: ["Teacher", "Professor", "Educational Researcher", "Curriculum Developer", "Corporate Trainer", "Educational Technology Specialist"],
+            description: "Shape future minds, conduct meaningful research, and contribute to the advancement of knowledge and learning.",
+            growth: "Stable career with opportunity to make lasting social impact"
+        }
+    };
+
+    // Assessment Logic
+    let currentQuestionIndex = 0;
+    let answers = {};
+    const totalQuestions = questions.length;
+
+    // Initialize Assessment
+    function initAssessment() {
+        renderQuestion(currentQuestionIndex);
+        updateProgress();
+    }
+
+    // Render Question (No changes)
+    function renderQuestion(index) {
+        const question = questions[index];
+        const content = document.getElementById('assessmentContent');
+        content.innerHTML = `
+            <div class="question-container active">
+                <div class="question">
+                    <h3>${question.question}</h3>
+                    <div class="options">
+                        ${question.options.map(option => `
+                            <label class="option" onclick="selectOption('${question.id}', '${option.value}', this)">
+                                <input type="radio" name="q${question.id}" value="${option.value}">
+                                <span>${option.text}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" ${index === 0 ? 'style="visibility: hidden"' : ''} 
+                            onclick="previousQuestion()">← Previous</button>
+                    <button class="btn" id="nextBtn" onclick="${index === totalQuestions - 1 ? 'finishAssessment()' : 'nextQuestion()'}" disabled>
+                        ${index === totalQuestions - 1 ? 'Get My Results 🎯' : 'Next Question →'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Select Option (No changes)
+    function selectOption(questionId, value, element) {
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
+        answers[questionId] = value;
+        document.getElementById('nextBtn').disabled = false;
+    }
+
+    // Next Question (No changes)
+    function nextQuestion() {
+        if (currentQuestionIndex < totalQuestions - 1) {
+            currentQuestionIndex++;
+            renderQuestion(currentQuestionIndex);
+            updateProgress();
+        }
+    }
+
+    // Previous Question (No changes)
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            renderQuestion(currentQuestionIndex);
+            updateProgress();
+            
+            const questionId = questions[currentQuestionIndex].id;
+            if (answers[questionId]) {
+                setTimeout(() => {
+                    const selectedOption = document.querySelector(`input[value="${answers[questionId]}"]`);
+                    if (selectedOption) {
+                        selectedOption.closest('.option').classList.add('selected');
+                        selectedOption.checked = true;
+                        document.getElementById('nextBtn').disabled = false;
+                    }
+                }, 100);
+            }
+        }
+    }
+
+    // Update Progress (No changes)
+    function updateProgress() {
+        const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+        document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+    }
+
+    // --- (MODIFIED) Finish Assessment ---
+    async function finishAssessment() {
+        const results = calculateResults();
+        displayResults(results);
+
+        // --- NEW: Save results to backend ---
+        if (currentUser && token) {
+            try {
+                // We'll save the top 3 recommendations
+                const resultsToSave = results.map(r => ({
+                    career: careerPaths[r.career].name,
+                    percentage: r.percentage
+                }));
+
+                const response = await fetch('http://localhost:5000/api/data/save-assessment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': token // Send the login token
+                    },
+                    body: JSON.stringify({ results: resultsToSave })
+                });
+
+                if (response.ok) {
+                    console.log('Assessment results saved successfully!');
+                } else {
+                    console.error('Failed to save assessment results.');
+                }
+            } catch (error) {
+                console.error('Error saving assessment:', error);
+            }
+        }
+        // --- End of new code ---
+    }
+
+    // Calculate Results (No changes)
+    function calculateResults() {
+        const scores = { technology: 0, healthcare: 0, business: 0, creative: 0, education: 0 };
+        Object.entries(answers).forEach(([questionId, answer]) => {
+            switch(answer) {
+                case 'tech_innovation':
+                case 'analytical_systematic':
+                case 'technical_logical':
+                case 'tech_modern':
+                case 'tech_advancement':
+                    scores.technology += 3;
+                    break;
+                case 'people_health':
+                case 'collaborative_empathetic':
+                case 'interpersonal_caring':
+                case 'healthcare_service':
+                case 'health_lives':
+                    scores.healthcare += 3;
+                    break;
+                case 'business_growth':
+                case 'strategic_leadership':
+                case 'leadership_business':
+                case 'corporate_dynamic':
+                case 'business_success':
+                    scores.business += 3;
+                    break;
+                case 'creative_design':
+                case 'creative_innovative':
+                case 'artistic_creative':
+                case 'creative_flexible':
+                case 'cultural_artistic':
+                    scores.creative += 3;
+                    break;
+                case 'education_research':
+                case 'research_methodical':
+                case 'analytical_research':
+                case 'academic_quiet':
+                case 'knowledge_education':
+                    scores.education += 3;
+                    break;
+            }
+        });
+        const maxScore = Math.max(...Object.values(scores));
+        if (maxScore === 0) {
+            scores.technology = 2;
+            scores.business = 2;
+            scores.creative = 1;
+        }
+        const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
+        return Object.entries(scores)
+            .map(([key, score]) => ({
+                career: key,
+                score: score,
+                percentage: Math.max(Math.round((score / total) * 100), score > 0 ? 15 : 0)
+            }))
+            .filter(result => result.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 3);
+    }
+
+    // Display Results (No changes)
+    function displayResults(results) {
+        document.getElementById('assessmentContent').style.display = 'none';
+        document.querySelector('.progress-container').style.display = 'none';
+        const resultContainer = document.getElementById('resultContainer');
+        const recommendationsDiv = document.getElementById('careerRecommendations');
+        if (results.length === 0) {
+            results = [
+                { career: 'technology', score: 2, percentage: 40 },
+                { career: 'business', score: 2, percentage: 35 },
+                { career: 'creative', score: 1, percentage: 25 }
+            ];
+        }
+        recommendationsDiv.innerHTML = results.map((result, index) => {
+            const path = careerPaths[result.career];
+            const rank = index === 0 ? '🥇 Top Match' : index === 1 ? '🥈 Great Match' : '🥉 Good Match';
+            return `
+                <div class="career-card">
+                    <div class="match-percentage">${rank} - ${result.percentage}%</div>
+                    <h4>${path.name}</h4>
+                    <p>${path.description}</p>
+                    <p class="career-list"><strong>Career Opportunities:</strong> ${path.careers.join(', ')}</p>
+                    <p><strong>Growth Outlook:</strong> ${path.growth}</p>
+                </div>
+            `;
+        }).join('');
+        resultContainer.classList.add('active');
+        setTimeout(() => {
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+    }
+
+    // --- ⭐ NEW: Auth Check ---
+    function checkAuth() {
+        if (!currentUser || !token) {
+            // If user is not logged in, show an alert and redirect
+            alert('You must be logged in to take the assessment. Redirecting to home page...');
+            window.location.href = 'index.html';
+        } else {
+            // User is logged in, start the assessment
+            initAssessment();
+        }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', checkAuth);
+
+    // Keyboard navigation (No changes)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === 'Enter') {
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn && !nextBtn.disabled) {
+                nextBtn.click();
+            }
+        } else if (e.key === 'ArrowLeft') {
+            if (currentQuestionIndex > 0) {
+                previousQuestion();
+            }
+        }
+    });
+</script>
+</body>
+</html>

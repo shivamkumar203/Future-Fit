@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Tracking - CareerPath Navigator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> 
+    <style>
+        /* Styles from your original file */
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 100px 20px 40px; }
+        .card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); color: #333; }
+        
+        /* (MODIFIED) Grid now supports 4 columns */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+        
+        .tile { background: #f8f9fa; border-radius: 14px; padding: 16px; border: 1px solid #eee; }
+        .tile h3 { margin: 0 0 12px 0; color: #667eea; }
+        .badge { display: inline-block; background: #eef2ff; color: #667eea; border-radius: 999px; padding: 4px 10px; font-size: 12px; margin-right: 6px; }
+        .back-button { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: #667eea; border: none; padding: 12px; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: all 0.3s ease; z-index: 1000; backdrop-filter: blur(10px); }
+        .back-button:hover { background: #fff; transform: translateY(-2px); }
+        
+        /* Dashboard card styles */
+        .dashboard-card {
+            background: #f8f9fa;
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+        }
+        .dashboard-card h3 {
+            color: #667eea;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem; /* Adjusted for 4 columns */
+        }
+        .dashboard-card .placeholder {
+            color: #777;
+            text-align: center;
+            padding: 20px 0;
+            font-style: italic;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard-card .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+            flex-grow: 1;
+        }
+        .dashboard-card .data-list li {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem; /* Adjusted for 4 columns */
+        }
+        .dashboard-card .data-list .result-item {
+            font-size: 0.95rem;
+        }
+        .dashboard-card .data-list .result-item strong {
+            color: #28a745;
+        }
+        .btn-link {
+            display: block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) { 
+            .container { padding-top: 80px; }
+            .grid { grid-template-columns: 1fr; } /* Stack cards on mobile */
+        }
+    </style>
+    <script>
+        function goBack(){ window.location.href = 'index.html'; }
+    </script>
+</head>
+<body>
+    
+    <button class="back-button" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-chart-line"></i> My Growth Dashboard</h1>
+            <p>Your personalized career journey, all in one place. Track your progress and next steps.</p>
+            
+            <div class="grid" id="dashboard-grid">
+                
+                <div class="dashboard-card" id="assessment-card">
+                    <h3><i class="fas fa-clipboard-check"></i> My Assessment</h3>
+                    <div class="loader"></div> </div>
+                
+                <div class="dashboard-card" id="colleges-card">
+                    <h3><i class="fas fa-university"></i> Saved Colleges</h3>
+                    <div class="loader"></div> </div>
+
+                <div class="dashboard-card" id="sessions-card">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Booked Sessions</h3>
+                    <div class="loader"></div> </div>
+
+                <div class="dashboard-card" id="jobs-card">
+                    <h3><i class="fas fa-briefcase"></i> Applied Jobs</h3>
+                    <p class="placeholder">Feature coming soon! Connect the "Apply Now" button to the backend to see your applications here.</p>
+                    <a href="jobs.html" class="btn-link">Find Jobs</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get user info from localStorage
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const token = localStorage.getItem('token');
+
+        // This function runs as soon as the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Check if user is logged in
+            if (!currentUser || !token) {
+                alert('You must be logged in to view your dashboard. Redirecting...');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // 2. Fetch dashboard data from the backend
+            fetchDashboardData();
+        });
+
+        async function fetchDashboardData() {
+            try {
+                const response = await fetch('http://localhost:5000/api/data/dashboard', {
+                    headers: {
+                        'x-auth-token': token // Send our login token
+                    }
+                });
+
+                if (!response.ok) {
+                    // If token is expired or invalid
+                    alert('Your session has expired. Please log in again.');
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('token');
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                const data = await response.json();
+                
+                // 3. Populate all the cards
+                populateAssessmentCard(data.assessmentResult);
+                populateCollegesCard(data.savedColleges);
+                populateSessionsCard(data.bookedSessions); // <-- NEWLY ADDED
+                
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                document.getElementById('dashboard-grid').innerHTML = '<p style="color: red;">Error loading dashboard. Please try again later.</p>';
+            }
+        }
+
+        function populateAssessmentCard(assessmentResult) {
+            const card = document.getElementById('assessment-card');
+            
+            // Check if user has taken the assessment
+            if (assessmentResult && assessmentResult.length > 0) {
+                // User HAS taken the test, show the results
+                let resultsHTML = '<ul class="data-list">';
+                assessmentResult.forEach(result => {
+                    resultsHTML += `
+                        <li class="result-item">
+                            <strong>${result.percentage}%</strong> Match - ${result.career}
+                        </li>
+                    `;
+                });
+                resultsHTML += '</ul>';
+                
+                card.innerHTML = `
+                    <h3><i class="fas fa-clipboard-check"></i> My Assessment</h3>
+                    ${resultsHTML}
+                    <a href="assessment.html" class="btn-link" style="background: #777;">Retake Test</a>
+                `;
+            } else {
+                // User has NOT taken the test, show a prompt
+                card.innerHTML = `
+                    <h3><i class="fas fa-clipboard-check"></i> My Assessment</h3>
+                    <p class="placeholder">You haven't taken the assessment yet. Discover your top career paths now!</p>
+                    <a href="assessment.html" class="btn-link">Take the Test</a>
+                `;
+            }
+        }
+
+        function populateCollegesCard(savedColleges) {
+            const card = document.getElementById('colleges-card');
+
+            // Check if user has saved any colleges
+            if (savedColleges && savedColleges.length > 0) {
+                // User HAS saved colleges, show the list
+                let collegesHTML = '<ul class="data-list">';
+                savedColleges.slice(0, 3).forEach(college => { // Show top 3
+                    collegesHTML += `<li>${college}</li>`;
+                });
+                if (savedColleges.length > 3) {
+                    collegesHTML += `<li>...and ${savedColleges.length - 3} more.</li>`;
+                }
+                collegesHTML += '</ul>';
+                card.innerHTML = `
+                    <h3><i class="fas fa-university"></i> Saved Colleges</h3>
+                    ${collegesHTML}
+                    <a href="colleges.html" class="btn-link">View All</a>
+                `;
+            } else {
+                // User has NOT saved any colleges, show a prompt
+                card.innerHTML = `
+                    <h3><i class="fas fa-university"></i> Saved Colleges</h3>
+                    <p class="placeholder">You haven't saved any colleges yet. Start exploring!</p>
+                    <a href="colleges.html" class="btn-link">Find Colleges</a>
+                `;
+            }
+        }
+
+        // --- ⭐ NEW: Function to show booked sessions ---
+        function populateSessionsCard(bookedSessions) {
+            const card = document.getElementById('sessions-card');
+            if (bookedSessions && bookedSessions.length > 0) {
+                let sessionsHTML = '<ul class="data-list">';
+                bookedSessions.slice(0, 3).forEach(session => { // Show top 3
+                    sessionsHTML += `<li>${session}</li>`;
+                });
+                if (bookedSessions.length > 3) {
+                    sessionsHTML += `<li>...and ${bookedSessions.length - 3} more.</li>`;
+                }
+                sessionsHTML += '</ul>';
+                card.innerHTML = `
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Booked Sessions</h3>
+                    ${sessionsHTML}
+                    <a href="mentorship.html" class="btn-link">Book More</a>
+                `;
+            } else {
+                // User has NOT booked, show a prompt
+                card.innerHTML = `
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Booked Sessions</h3>
+                    <p class="placeholder">You haven't booked any mentor sessions yet.</p>
+                    <a href="mentorship.html" class="btn-link">Find a Mentor</a>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

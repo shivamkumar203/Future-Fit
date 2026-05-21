@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Fit - Your Career Guidance Platform</title>
+    <meta name="description" content="Future-Fit - Comprehensive career counseling platform developed by Sanjay Yadav. Find your perfect career path with expert guidance.">
+    <meta name="keywords" content="career guidance, career counseling, job advice, career path, professional development, Sanjay Yadav">
+    <meta name="author" content="Sanjay Yadav">
+    
+    <meta property="og:title" content="Future-Fit - Your Career Guidance Platform">
+    <meta property="og:description" content="Comprehensive career counseling platform developed by Sanjay Yadav">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+</head>
+<body>
+    <div id="mainContent" class="main-content" style="display: block !important; opacity: 1 !important;">
+        <div id="mobileNavDropdown" class="mobile-nav-dropdown"></div>
+        <header>
+    <div class="header-container">
+        <a href="#" class="logo">
+            <i class="fas fa-compass"></i>
+            Future-Fit
+        </a>
+        
+        <nav>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                <li><a href="assessment.html" class="nav-link" data-page="assessment"><i class="fas fa-clipboard-check"></i> Assessment</a></li>
+                <li><a href="streams.html" class="nav-link" data-page="streams"><i class="fas fa-stream"></i> Streams</a></li>
+                <li><a href="colleges.html" class="nav-link" data-page="colleges"><i class="fas fa-university"></i> Colleges</a></li>
+                <li><a href="jobs.html" class="nav-link" data-page="jobs"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+        
+            <div class="auth-buttons">
+                <button class="btn-login">Login</button>
+                <button class="btn-signup">Sign Up</button>
+            </div>
+            
+            <div class="user-menu" id="userMenu" style="display:none;">
+                <div class="user-avatar" id="userAvatar">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userNameLabel">Account</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                        <strong id="userEmailLabel">Signed in</strong>
+                        <small>Welcome back</small>
+                    </div>
+                    
+                    <button class="dropdown-item" id="goToGrowth"><i class="fas fa-chart-line"></i> Growth</button>
+                    <button class="dropdown-item" id="goToMentorship"><i class="fas fa-chalkboard-teacher"></i> Mentorship</button>
+                    <button class="dropdown-item" id="goToJobs"><i class="fas fa-briefcase"></i> Jobs</button>
+                    <button class="dropdown-item" id="goToColleges"><i class="fas fa-university"></i> Colleges</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item text-danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+            
+            <button class="btn-theme" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme" style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:20px; border:1px solid rgba(0,0,0,0.1); background:#fff; color:#333; cursor:pointer;">
+                <i class="fas fa-moon"></i>
+            </button>
+
+        </div>
+        
+        <button class="mobile-menu-toggle" aria-label="Open menu" title="Menu">
+            <i class="fas fa-bars" style="color:#111; text-shadow:0 1px 2px rgba(255,255,255,0.6);"></i>
+        </button>
+    </div>
+</header>
+
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <!-- <a href="#features" class="button">
+                 <i class="fas fa-arrow-right"></i>EXPLORE
+                </a> -->
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Get Started with Our Tools</h2>
+                <p class="section-subtitle">Choose your path to career success</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card interactive-card" data-page="assessment" onclick="navigateToPage('assessment.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Career Assessment</h3>
+                        <p>Take our comprehensive 5-question career assessment to discover careers that match your interests, skills, and personality.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-play"></i> Start Assessment
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" data-page="streams" onclick="navigateToPage('streams.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <h3>Career Streams</h3>
+                        <p>Explore 15 comprehensive career streams with detailed information about specializations, requirements, and opportunities.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-compass"></i> Explore Streams
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" data-page="colleges" onclick="navigateToPage('colleges.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>College Finder</h3>
+                        <p>Search and discover the best colleges and universities for your career goals with detailed information and rankings.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-search"></i> Find Colleges
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" onclick="navigateToPage('mentorship.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Expert Mentorship</h3>
+                        <p>Connect with industry professionals and experienced mentors who can guide you in your career journey.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-chalkboard-teacher"></i> Apply for Mentorship
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" onclick="navigateToPage('growth.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Growth Tracking</h3>
+                        <p>Monitor your progress, set career goals, and track your persnoal and  professional development over time.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-clock"></i> Track Growth                                    </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" onclick="navigateToPage('jobs.html')">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Job & InternshipOpportunities</h3>
+                        <p>Explore job openings, internships, and career opportunities that align with your goals and qualifications.</p>
+                        <div class="feature-action">
+                            <button class="feature-btn">
+                                <i class="fas fa-search"></i> Search Opportunities
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title">Platform Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Students Guided</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Career Streams</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Top Colleges</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">User Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="streams" class="career-streams">
+            <div class="container">
+                <h2 class="section-title">Popular Career Streams</h2>
+                <p class="section-subtitle">Discover various career paths and find the one that suits you best</p>
+                
+                <div class="streams-grid">
+                    <div class="stream-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Technology</h3>
+                        <p>Software Development, AI, Cybersecurity, Data Science</p>
+                        <div class="stream-stats">
+                            <span>📊 High Demand</span>
+                            <span>💰 ₹8-25L avg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stream-card">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Healthcare</h3>
+                        <p>Medicine, Nursing, Healthcare Administration</p>
+                        <div class="stream-stats">
+                            <span>📊 Growing</span>
+                            <span>💰 ₹6-30L avg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stream-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Business</h3>
+                        <p>Management, Marketing, Entrepreneurship</p>
+                        <div class="stream-stats">
+                            <span>📊 Stable</span>
+                            <span>💰 ₹5-20L avg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stream-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Creative Arts</h3>
+                        <p>Design, Media, Entertainment, Digital Arts</p>
+                        <div class="stream-stats">
+                            <span>📊 Emerging</span>
+                            <span>💰 ₹4-15L avg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stream-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Legal</h3>
+                        <p>Law, Legal Services, Compliance</p>
+                        <div class="stream-stats">
+                            <span>📊 Steady</span>
+                            <span>💰 ₹6-25L avg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stream-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Engineering</h3>
+                        <p>Mechanical, Civil, Electrical Engineering</p>
+                        <div class="stream-stats">
+                            <span>📊 Traditional</span>
+                            <span>💰 ₹5-18L avg</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 2rem;">
+                    <button class="cta-button" onclick="navigateToPage('streams.html')">
+                        <i class="fas fa-arrow-right"></i> Explore All Streams
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Future-Fit</h2>
+                        <p>Future-Fit is a comprehensive career counseling platform designed to bridge the gap between career confusion and clarity. Developed as a final year project by Sanjay Yadav, this full-stack platform combines modern web technologies to provide personalized career guidance.</p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Comprehensive Career Assessment</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>15+ Career Stream Analysis</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>College & University Finder</span>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Personalized Recommendations</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-developer">
+                        <div class="developer-card">
+                            <div class="developer-image">
+                                <img src="images/profile.jpg" alt="Sanjay Yadav - Full Stack Developer" class="developer-profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="developer-fallback">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                            </div>
+                            <h3>Sanjay Yadav</h3>
+                            <p class="developer-title">Full Stack Developer</p>
+                            <p class="developer-description">B.Tech CSE Student passionate about creating impactful solutions that solve real-world problems.</p>
+                            <div class="developer-skills">
+                                <span>HTML/CSS</span>
+                                <span>JavaScript</span>
+                                <span>Full Stack</span>
+                                <span>UI/UX</span>
+                            </div>
+                              <div class="social-links" class="devcardicon">
+                        <a href="https://linkedin.com/in/sanjuydv7" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/sanjayydv77" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://instagram.com/sanjuydv_7" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+
+                        </a>
+                        <a href="mailto:sanjuydv5357@gmail.com" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Future-Fit</h3>
+                    <p>Your trusted partner in career guidance and professional development. Built to help you navigate your career journey with confidence.</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/sanjuydv7" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/sanjayydv77" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://instagram.com/sanjuydv_7" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:sanjuydv5357@gmail.com" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="assessment.html">Career Assessment</a></li>
+                        <li><a href="streams.html">Career Streams</a></li>
+                        <li><a href="colleges.html">College Finder</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> sanjuydv5357@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Indore, M.P., India</li>
+                        <li><i class="fas fa-code"></i> Full Stack Developer</li>
+                        <li><i class="fas fa-graduation-cap"></i> B.Tech CSE Student</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li><i class="fab fa-html5"></i> HTML5 & CSS3</li>
+                        <li><i class="fab fa-js-square"></i> JavaScript ES6+</li>
+                        <li><i class="fas fa-mobile-alt"></i> Responsive Design</li>
+                        <li><i class="fab fa-git-alt"></i> Version Control</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Future-Fit. Developed with ❤️  by <strong>Sanjay Yadav</strong> | Full Stack Developer | Indore, M.P.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="notificationContainer" class="notification-container"></div>
+<div id="loginModal" class="modal">
+        <div class="modal-content modern-modal">
+            <div class="modal-header-stylish">
+                <button class="close-modern close">&times;</button>
+                <h2>Welcome Back!</h2>
+                <p>Unlock your career potential</p>
+            </div>
+            
+            <div class="modal-body-stylish">
+                <form id="loginForm">
+                    <div class="input-group-modern">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="loginEmail" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-group-modern">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+
+                    <div class="forgot-link-wrapper">
+                        <a href="#" id="forgotPasswordLink" class="modern-link">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-modern-submit submit-btn">
+                        <span>Login to Future-Fit</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="modal-footer-stylish">
+                <p>New here? <a href="#" onclick="document.getElementById('loginModal').style.display='none'; document.getElementById('signupModal').style.display='block';">Create Account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content modern-modal">
+            <div class="modal-header-stylish signup-header">
+                <button class="close-modern close">&times;</button>
+                <h2>Join Future-Fit</h2>
+                <p>Start your journey today </p>
+            </div>
+            
+            <div class="modal-body-stylish">
+                <form id="signupForm">
+                    <div class="input-group-modern">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="signupName" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="input-group-modern">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="signupEmail" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-group-modern">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="signupPassword" placeholder="Create Password" required>
+                    </div>
+
+                    <ul id="passwordRequirements" class="modern-requirements">
+                        <li id="pw-length" class="invalid"><i class="fas fa-circle"></i> 8+ Characters</li>
+                        <li id="pw-upper" class="invalid"><i class="fas fa-circle"></i> Uppercase</li>
+                        <li id="pw-number" class="invalid"><i class="fas fa-circle"></i> Number</li>
+                    </ul>
+
+                    <button type="submit" class="btn-modern-submit signup-btn-color submit-btn">
+                        <span>Create Account</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
+            </div>
+             <div class="modal-footer-stylish">
+                <p>Already have an account? <a href="#" onclick="document.getElementById('signupModal').style.display='none'; document.getElementById('loginModal').style.display='block';">Login</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content modern-modal">
+            
+            <div class="modal-header-stylish" style="background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);">
+                <button class="close-modern close">&times;</button>
+                <h2>Reset Password</h2>
+                <p>Don't worry, it happens to the best of us.</p>
+            </div>
+            
+            <div class="modal-body-stylish">
+                <form id="forgotPasswordForm">
+                    <div class="input-group-modern">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="forgotEmail" placeholder="Enter your registered email" required>
+                    </div>
+
+                    <button type="submit" class="btn-modern-submit submit-btn" style="background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%) !important; box-shadow: 0 10px 20px -10px rgba(255, 94, 98, 0.5);">
+                        <span>Send Reset Link</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="modal-footer-stylish">
+                <p>Remembered it? <a href="#" style="color: #ff5e62;" onclick="document.getElementById('forgotPasswordModal').style.display='none'; document.getElementById('loginModal').style.display='block';">Back to Login</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Enhanced main.js functionality integrated
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Add this inside document.addEventListener('DOMContentLoaded', ...)
+    
+    function wakeUpServer() {
+        // This silently pings the server to wake it up
+        fetch('http://localhost:5000')
+            .then(() => console.log("✅ Server Woke Up!"))
+            .catch(err => console.log("⏳ Server Waking up..."));
+    }
+    
+    // Call it immediately when page loads
+    wakeUpServer();
+        // ✅ REMOVED initializeWelcomeScreen() call.
+        initializeModals();
+        initializeNavigationBar();
+        initializeSmoothScrolling();
+        initializeNavbarInteractivity();
+        initializeAuth();
+        initializeTheme();
+
+        // Check for URL messages
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('verified') && urlParams.get('verified') === 'true') {
+            showNotification('Email verified successfully! Please sign in.', 'success');
+            
+            // Automatically open the login modal
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                setTimeout(() => {
+                    loginModal.style.display = 'block';
+                }, 500);
+            }
+        }
+    });
+    
+    // Navbar Interactivity
+    function initializeNavbarInteractivity() {
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.getElementById('navMenu');
+        const mobileNavDropdown = document.getElementById('mobileNavDropdown');
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            updateActiveMenuOnScroll();
+        });
+        
+        if (mobileMenuToggle && mobileNavDropdown) {
+            mobileMenuToggle.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    if (mobileNavDropdown.classList.contains('active')) {
+                        mobileNavDropdown.classList.remove('active');
+                        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    } else {
+                        mobileNavDropdown.innerHTML = navMenu.innerHTML;
+                        mobileNavDropdown.classList.add('active');
+                        mobileMenuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                        
+                        const mobileLinks = mobileNavDropdown.querySelectorAll('a');
+                        mobileLinks.forEach(link => {
+                            link.addEventListener('click', function() {
+                                mobileNavDropdown.classList.remove('active');
+                                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                            });
+                        });
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && mobileNavDropdown) {
+                mobileNavDropdown.classList.remove('active');
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        });
+        
+        function updateActiveMenuOnScroll() {
+            const scrollPosition = window.scrollY + 100;
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }
+    }
+
+    // ✅ REMOVED initializeWelcomeScreen() function definition.
+
+    // Navigation Bar Enhancement
+    function initializeNavigationBar() {
+        const navigationSelectors = [
+            'nav a', '.nav-link', '.navbar a', '.navigation a',
+            '.menu a', '.header a', 'header a', '.nav-item a',
+            '.nav-menu a'
+        ];
+        let navLinks = [];
+        navigationSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            navLinks = navLinks.concat(Array.from(elements));
+        });
+        navLinks = [...new Set(navLinks)];
+        
+        navLinks.forEach(link => {
+            const linkText = link.textContent.toLowerCase().trim();
+            const linkHref = link.getAttribute('href');
+            
+            if (linkText.includes('home') || linkHref === '#home' || linkHref === 'index.html') {
+                if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
+                    link.addEventListener('click', (e) => {
+                        if (linkHref === '#home') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    });
+                } else {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.location.href = 'index.html';
+                    });
+                }
+            }
+            if (linkText.includes('assessment') || linkHref === 'assessment.html' || link.dataset.page === 'assessment') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToPage('assessment.html');
+                });
+            }
+            if (linkText.includes('stream') || linkHref === 'streams.html' || link.dataset.page === 'streams') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToPage('streams.html');
+                });
+            }
+            if (linkText.includes('college') || linkHref === 'colleges.html' || link.dataset.page === 'colleges') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToPage('colleges.html');
+                });
+            }
+            if (linkText.includes('jobs') || linkHref === 'jobs.html' || link.dataset.page === 'jobs') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToPage('jobs.html');
+                });
+            }
+        });
+    }
+
+    // Navigation Functions
+    function navigateToPage(pageUrl) {
+        showLoadingIndicator();
+        setTimeout(() => {
+            window.location.href = pageUrl;
+        }, 800);
+    }
+    function showLoadingIndicator() {
+        const loader = document.getElementById('navigationLoader');
+        if (loader) {
+            loader.style.display = 'flex';
+            setTimeout(() => { loader.style.opacity = '1'; }, 10);
+        }
+    }
+    function hideLoadingIndicator() {
+        const loader = document.getElementById('navigationLoader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; }, 300);
+        }
+    }
+
+    // Modal Functionality + Auth submit handlers
+    function initializeModals() {
+        const loginBtn = document.querySelector('.btn-login');
+        const signupBtn = document.querySelector('.btn-signup');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeBtns = document.querySelectorAll('.close');
+
+        if (loginBtn && loginModal) {
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'block';
+            });
+        }
+        if (signupBtn && signupModal) {
+            signupBtn.addEventListener('click', () => {
+                signupModal.style.display = 'block';
+            });
+        }
+        closeBtns.forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                e.target.closest('.modal').style.display = 'none';
+            });
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        const loginFormEl = document.getElementById('loginForm');
+        const signupFormEl = document.getElementById('signupForm');
+        
+        // LOGIN FORM SUBMIT
+        if (loginFormEl) {
+            loginFormEl.addEventListener('submit', function(e){
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                (async () => {
+                    const ok = await authLogin(email, password);
+                    if (ok) {
+                        loginModal.style.display = 'none';
+                        loginFormEl.reset();
+                        showNotification('Logged in successfully!', 'success');
+                        updateHeaderAuthState();
+                    }
+                })();
+            });
+        }
+        
+        // SIGNUP FORM SUBMIT
+        if (signupFormEl) {
+            signupFormEl.addEventListener('submit', function(e){
+                e.preventDefault();
+                const name = document.getElementById('signupName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const password = document.getElementById('signupPassword').value;
+                (async () => {
+                    const ok = await authRegister(name, email, password, 'student'); 
+                    if (ok) {
+                        signupModal.style.display = 'none';
+                        signupFormEl.reset();
+                    }
+                })();
+            });
+        }
+
+        // Forgot password modal logic
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        
+        if (forgotPasswordLink && forgotPasswordModal) {
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                forgotPasswordModal.style.display = 'block';
+            });
+        }
+        if (forgotPasswordForm) {
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('forgotEmail').value.trim();
+                (async () => {
+                    const ok = await authForgotPassword(email);
+                    if (ok) {
+                        forgotPasswordModal.style.display = 'none';
+                    }
+                })();
+            });
+        }
+    }
+
+    // Full-Stack Auth Logic
+    function initializeAuth(){
+        updateHeaderAuthState(); 
+        const userAvatar = document.getElementById('userAvatar');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (userAvatar && userDropdown) {
+            userAvatar.addEventListener('click', function(){
+                userDropdown.classList.toggle('active');
+                document.getElementById('userMenu').classList.toggle('active');
+            });
+            window.addEventListener('click', function(e){
+                if (e.target.closest('#userMenu') === null) {
+                    userDropdown.classList.remove('active');
+                    document.getElementById('userMenu').classList.remove('active');
+                }
+            });
+        }
+        if (logoutBtn){ 
+            logoutBtn.addEventListener('click', function(){ 
+                authLogout(); 
+                updateHeaderAuthState(); 
+                showNotification('You have been logged out.', 'info'); 
+            }); 
+        }
+        
+        const navMap = [
+            ['goToGrowth','growth.html'],
+            ['goToMentorship','mentorship.html'],
+            ['goToColleges','colleges.html'],
+            ['goToJobs','jobs.html']
+        ];
+        navMap.forEach(([id, url])=>{ const el=document.getElementById(id); if(el){ el.addEventListener('click',()=>navigateToPage(url)); }});
+    }
+
+    function getCurrentUser(){ 
+        try { 
+            return JSON.parse(localStorage.getItem('currentUser') || 'null'); 
+        } catch(e){ 
+            return null; 
+        } 
+    }
+    function setCurrentUser(user, token){ 
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('token', token);
+    }
+
+    async function authRegister(name, email, password, role) {
+        const signupButton = document.querySelector('#signupForm .submit-btn');
+        const checks = {
+            length: password.length >= 8,
+            upper: /[A-Z]/.test(password),
+            lower: /[a-z]/.test(password),
+            number: /[0-9]/.test(password),
+            special: /[^A-Za-z0-9]/.test(password)
+        };
+        const allValid = Object.values(checks).every(Boolean);
+
+        if (!allValid) {
+            showNotification('Password does not meet all requirements.', 'error');
+            return false;
+        }
+
+        signupButton.innerHTML = '<span class="loading"></span> Signing Up...';
+        signupButton.disabled = true;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, role })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                showNotification(data.msg, 'error');
+                return false;
+            }
+            showNotification(data.msg, 'success');
+            return true;
+        } catch (error) {
+            console.error('Signup Error:', error);
+            showNotification('Network error. Is the backend server running?', 'error');
+            return false;
+        } finally {
+            signupButton.innerHTML = '<i class="fas fa-user-plus"></i> Sign Up';
+            signupButton.disabled = false;
+        }
+    }
+
+  async function authLogin(email, password){
+        const loginButton = document.querySelector('#loginForm .submit-btn');
+        loginButton.innerHTML = '<span class="loading"></span> Logging In...';
+        loginButton.disabled = true;
+
+        try {
+            // 🚨 THIS IS THE FIX: Using the live Render URL explicitly
+            const response = await fetch('http://localhost:5000/api/auth/signin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                if (response.status === 401) { 
+                    showNotification(`
+                        ${data.msg} 
+                        <a href="#" onclick="authResendVerification('${email}')" style="color: #d7263d; text-decoration: underline; font-weight: bold;">
+                            Resend verification?
+                        </a>
+                    `, 'error');
+                } else {
+                    showNotification(data.msg, 'error');
+                }
+                return false;
+            }
+            setCurrentUser(data.user, data.token);
+            return true;
+        } catch (error) {
+            console.error('Login Error:', error);
+            showNotification('Network error. Is the backend server running?', 'error');
+            return false;
+        } finally {
+            loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+            loginButton.disabled = false;
+        }
+    }
+
+    async function authResendVerification(email) {
+        if (!email) {
+            showNotification('Please enter your email in the field first.', 'error');
+            return;
+        }
+        showNotification('Sending new verification link...', 'info');
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/resend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                showNotification(data.msg, 'error');
+            } else {
+                showNotification(data.msg, 'success');
+            }
+        } catch (error) {
+            showNotification('Network error. Please try again.', 'error');
+        }
+    }
+
+    async function authForgotPassword(email) {
+        const forgotButton = document.querySelector('#forgotPasswordForm .submit-btn');
+        forgotButton.innerHTML = '<span class="loading"></span> Sending...';
+        forgotButton.disabled = true;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await response.json();
+            
+            showNotification(data.msg, 'success');
+            return true;
+
+        } catch (error) {
+            console.error('Forgot Password Error:', error);
+            showNotification('Network error. Please try again.', 'error');
+            return false;
+        } finally {
+            forgotButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link';
+            forgotButton.disabled = false;
+        }
+    }
+
+    function authLogout(){ 
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+    }
+    
+    function updateHeaderAuthState(){
+        const current = getCurrentUser();
+        const authButtons = document.querySelector('.auth-buttons');
+        const userMenu = document.getElementById('userMenu');
+        if (current){
+            if (authButtons) authButtons.style.display = 'none';
+            if (userMenu) {
+                document.getElementById('userNameLabel').textContent = current.name || 'Account';
+                document.getElementById('userEmailLabel').textContent = current.email;
+                userMenu.style.display = 'block';
+            }
+        } else {
+            if (userMenu) userMenu.style.display = 'none';
+            if (authButtons) authButtons.style.display = 'flex';
+        }
+    }
+
+    // Theme Toggle
+    function initializeTheme(){
+        const toggle = document.getElementById('themeToggle');
+        const saved = localStorage.getItem('theme') || 'light';
+        if (saved === 'dark') {
+            document.documentElement.classList.add('dark-theme');
+        } else {
+            document.documentElement.classList.remove('dark-theme');
+        }
+        updateThemeButtonIcon();
+        if (toggle){
+            toggle.addEventListener('click', function(){
+                document.documentElement.classList.toggle('dark-theme');
+                const mode = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+                localStorage.setItem('theme', mode);
+                updateThemeButtonIcon();
+            });
+        }
+    }
+    function updateThemeButtonIcon(){
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const dark = document.documentElement.classList.contains('dark-theme');
+        btn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        btn.style.background = dark ? '#222' : '#fff';
+        btn.style.color = dark ? '#ffd166' : '#333';
+        btn.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+
+    // Smooth Scrolling
+    function initializeSmoothScrolling() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#') && href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    }
+
+    // Feature Card Actions
+    (function initializeExtraFeatureCardActions(){
+        document.addEventListener('DOMContentLoaded', function(){
+            const cards = document.querySelectorAll('.features .feature-card');
+            cards.forEach(card => {
+                const titleEl = card.querySelector('h3');
+                if (!titleEl) return;
+                const title = titleEl.textContent.trim().toLowerCase();
+                if (title.includes('job') || title.includes('opportunities')) {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function(){
+                        navigateToPage('jobs.html');
+                    });
+                }
+                if (title.includes('growth tracking')) {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function(){
+                        navigateToPage('growth.html');
+                    });
+                }
+                if (title.includes('expert mentorship')) {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function(){
+                        navigateToPage('mentorship.html');
+                    });
+                }
+            });
+        });
+    })();
+
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+    }
+
+    // Notification system
+    function showNotification(message, type = 'info') {
+        let container = document.getElementById('notificationContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'notificationContainer';
+            container.className = 'notification-container';
+            document.body.appendChild(container);
+        }
+        const notif = document.createElement('div');
+        notif.className = `notification ${type}`;
+        notif.innerHTML = message;
+        container.appendChild(notif);
+        setTimeout(() => {
+            notif.classList.add('show');
+        }, 10);
+        setTimeout(() => {
+            notif.classList.remove('show');
+            setTimeout(() => notif.remove(), 400);
+        }, 4000); 
+    }
+
+    // Password Strength Validation
+    document.addEventListener('DOMContentLoaded', function() {
+        const pwInput = document.getElementById('signupPassword');
+        const pwReqs = {
+            length: document.getElementById('pw-length'),
+            upper: document.getElementById('pw-upper'),
+            lower: document.getElementById('pw-lower'),
+            number: document.getElementById('pw-number'),
+            special: document.getElementById('pw-special')
+        };
+        if (pwInput) {
+            pwInput.addEventListener('input', function() {
+                const val = pwInput.value;
+                const checks = {
+                    length: val.length >= 8,
+                    upper: /[A-Z]/.test(val),
+                    lower: /[a-z]/.test(val),
+                    number: /[0-9]/.test(val),
+                    special: /[^A-Za-z0-9]/.test(val)
+                };
+                Object.keys(pwReqs).forEach(key => {
+                    if (checks[key]) {
+                        pwReqs[key].classList.add('valid');
+                        pwReqs[key].classList.remove('invalid');
+                        pwReqs[key].querySelector('i').className = 'fas fa-check';
+                    } else {
+                        pwReqs[key].classList.remove('valid');
+                        pwReqs[key].classList.add('invalid');
+                        pwReqs[key].querySelector('i').className = 'fas fa-times';
+                    }
+                });
+            });
+        }
+    });
+</script>
+
+    <style>
+        /* Additional Navigation Styles */
+        .interactive-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-action {
+            margin-top: 1rem;
+        }
+
+        .feature-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .feature-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Navigation Loader Styles */
+        .navigation-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+            background: -webkit-linear-gradient(rgb(177, 238, 223),gray );
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .about-feature i {
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .developer-card {
+            margin-top: 40px;
+            background: rgb(180, 206, 236);
+            padding: 2rem;
+            /* border: 5px solid black; */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .developer-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .developer-profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .developer-fallback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .developer-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .developer-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .developer-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .developer-skills span {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Stream Stats */
+        .stream-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stream-stats span {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        /* Text Center Utility */
+        .text-center {
+            text-align: center;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature-card {
+                margin-bottom: 1rem;
+            }
+
+            .streams-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stream-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .streams-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Enhanced Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 2rem 0;
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-menu a {
+                color: #333;
+                font-size: 1.2rem;
+                padding: 1rem;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu a:hover {
+                background: rgba(102, 126, 234, 0.1);
+                color: #667eea;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+        }
+
+        /* Notification styles */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+        .notification {
+            min-width: 220px;
+            max-width: 90vw;
+            margin: 0.5rem 0;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            background: #fff;
+            color: #333;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(.4,2,.6,1);
+            font-weight: 600;
+            pointer-events: auto;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .notification.success { background: #e6ffed; color: #1a7f37; border: 1px solid #b7ebc6; }
+        .notification.error { background: #fff1f0; color: #d7263d; border: 1px solid #ffb3b3; }
+        .notification.warning { background: #fffbe6; color: #ad8b00; border: 1px solid #ffe58f; }
+        .dark-theme .notification { background: #222; color: #ffd166; border: 1px solid #444; }
+        .dark-theme .notification.success { background: #193c2f; color: #7fffa7; border: 1px solid #2e8b57; }
+        .dark-theme .notification.error { background: #3c1919; color: #ff7f7f; border: 1px solid #d7263d; }
+        .dark-theme .notification.warning { background: #3c3919; color: #ffe066; border: 1px solid #ad8b00; }
+
+        /* Modal improvements for mobile */
+        .modal {
+            overflow-y: auto;
+        }
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @media (max-width: 600px) {
+            .modal-content {
+                margin: 5% auto;
+                width: 98vw;
+                max-width: 99vw;
+                border-radius: 12px;
+                padding: 0;
+            }
+            .modal-header, .modal-content form {
+                padding: 1rem;
+            }
+        }
+
+        .password-requirements {
+            list-style: none;
+            margin: 0.5rem 0 0 0;
+            padding: 0;
+            font-size: 0.95rem;
+        }
+        .password-requirements li {
+            margin-bottom: 0.2rem;
+            color: #d7263d;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            transition: color 0.2s;
+        }
+        .password-requirements li.valid {
+            color: #1a7f37;
+        }
+        .password-requirements li.valid i {
+            color: #1a7f37;
+        }
+        .password-requirements li.invalid i {
+            color: #d7263d;
+        }
+        .password-requirements i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .forgot-password-link {
+            margin-top: 0.8rem;
+            text-align: right;
+        }
+        .forgot-password-link a {
+            color: #667eea;
+            text-decoration: underline;
+            font-size: 0.98rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .forgot-password-link a:hover {
+            color: #764ba2;
+        }
+        /* --- MODERN AUTH MODAL STYLES (Overrides) --- */
+
+/* Reset the default modal content style to fit the new design */
+.modal-content.modern-modal {
+    background: #fff;
+    border-radius: 24px;
+    padding: 0; 
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 420px;
+    width: 90%;
+}
+
+@keyframes modalPop {
+    0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Vibrant Header */
+.modal-header-stylish {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px 30px 30px;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.signup-header {
+    background: linear-gradient(135deg, #4ecdc4 0%, #556270 100%);
+}
+
+.modal-header-stylish h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: white !important; /* Force white text */
+}
+
+.modal-header-stylish p {
+    margin: 5px 0 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+    color: white !important;
+}
+
+/* Close Button Override */
+.close-modern {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.2) !important;
+    border: none;
+    color: white !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: none; /* Remove old float */
+    opacity: 1; /* Fix opacity */
+}
+.close-modern:hover {
+    background: rgba(255,255,255,0.4) !important;
+    transform: rotate(90deg);
+    color: white !important;
+}
+
+/* Form Body */
+.modal-body-stylish {
+    padding: 35px 30px 20px;
+}
+
+/* Input Groups */
+.input-group-modern {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.input-group-modern input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    border: 2px solid #edf2f7;
+    background: #f7fafc;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #4a5568;
+    transition: all 0.3s ease;
+    outline: none;
+    margin: 0; /* Reset margin */
+}
+
+.input-group-modern input:focus {
+    background: #fff;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.input-group-modern input:focus + .input-icon {
+    color: #667eea;
+}
+
+/* Links */
+.forgot-link-wrapper {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 25px;
+}
+.modern-link {
+    color: #718096;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.modern-link:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+/* Button Overrides (Important to override .submit-btn) */
+.btn-modern-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 20px -10px rgba(118, 75, 162, 0.5);
+}
+
+.signup-btn-color {
+    background: linear-gradient(90deg, #4ecdc4 0%, #556270 100%) !important;
+    box-shadow: 0 10px 20px -10px rgba(78, 205, 196, 0.5);
+}
+
+.btn-modern-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+.modal-footer-stylish {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #edf2f7;
+    color: #718096;
+    font-size: 0.95rem;
+}
+.modal-footer-stylish a {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Password Requirements */
+.modern-requirements {
+    list-style: none;
+    padding: 0;
+    margin: -10px 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.modern-requirements li {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.modern-requirements li.valid {
+    color: #48bb78;
+}
+/* --- FIX SCROLLING & LAYOUT --- */
+.modal-content.modern-modal {
+    max-height: 90vh;       /* Limit height to 90% of screen */
+    overflow-y: auto;       /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the body area can grow/scroll */
+.modal-body-stylish {
+    flex-shrink: 0;         /* Prevent shrinking */
+    padding-bottom: 10px;
+}
+
+/* Ensure footer stays accessible */
+.modal-footer-stylish {
+    flex-shrink: 0;
+}
+
+/* Custom Scrollbar for the modal */
+.modern-modal::-webkit-scrollbar {
+    width: 6px;
+}
+.modern-modal::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+.modern-modal::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 3px;
+}
+    </style>
+</body>
+</html>

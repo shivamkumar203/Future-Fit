@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Career Streams - CareerPath Navigator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* --- Core Styles --- */
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #4ecdc4;
+            --text: #333;
+            --bg: #f4f7fa;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); min-height: 100vh; color: var(--text); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header { text-align: center; color: white; margin-bottom: 30px; animation: fadeInDown 1s ease-out; padding-top: 40px; }
+        .header h1 { font-size: 2.8rem; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: 700; }
+        .header p { font-size: 1.2rem; opacity: 0.95; max-width: 600px; margin: 0 auto; }
+
+        /* Back Button */
+        .back-btn { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.95); color: var(--primary); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 1000; }
+        .back-btn:hover { background: white; transform: scale(1.1); }
+
+        /* Search & Filters Container */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Search Input */
+        .search-bar { 
+            background: white; 
+            padding: 15px 25px; 
+            border-radius: 50px; 
+            display: flex; 
+            align-items: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            margin-bottom: 20px;
+        }
+        .search-icon { color: var(--primary); font-size: 1.2rem; margin-right: 15px; }
+        .search-input { width: 100%; border: none; background: transparent; font-size: 1.1rem; outline: none; color: #444; }
+
+        /* Direct Buttons / Filters */
+        .filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .filter-tab { 
+            padding: 8px 18px; 
+            background: rgba(255, 255, 255, 0.2); 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            transition: all 0.2s; 
+        }
+        .filter-tab:hover, .filter-tab.active { 
+            background: white; 
+            color: var(--primary); 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        /* Stream Cards Grid */
+        .streams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding-bottom: 50px; }
+        .stream-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; position: relative; display: flex; flex-direction: column; }
+        .stream-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .stream-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left; }
+        .stream-card:hover::after { transform: scaleX(1); }
+
+        .stream-icon-wrapper { background: #f8faff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; transition: background 0.3s; }
+        .stream-card:hover .stream-icon-wrapper { background: #eef2ff; }
+        .stream-icon { font-size: 3.5rem; background: -webkit-linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .stream-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .stream-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #2d3748; }
+        .stream-count { font-size: 0.85rem; color: var(--primary); background: rgba(102, 126, 234, 0.1); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px; font-weight: 600; align-self: flex-start; }
+        .stream-desc { font-size: 0.95rem; color: #718096; line-height: 1.6; }
+
+        /* --- IMPROVED MODAL STYLES --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; }
+        .modal.show { display: flex; opacity: 1; }
+        
+        .modal-content { 
+            background: #fcfcfc; 
+            width: 95%; 
+            max-width: 900px; 
+            height: 85vh; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal.show .modal-content { transform: scale(1); }
+        
+        /* Modal Header */
+        .modal-header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 25px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 10; }
+        .modal-title-group h2 { font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: -0.5px; }
+        .modal-close { background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.2s; }
+        .modal-close:hover { background: rgba(255,255,255,0.4); transform: rotate(90deg); }
+
+        /* Breadcrumbs */
+        .breadcrumbs { background: white; padding: 15px 35px; border-bottom: 1px solid #f0f0f0; display: flex; gap: 10px; align-items: center; font-size: 0.95rem; color: #888; overflow-x: auto; white-space: nowrap; }
+        .breadcrumb-item { cursor: pointer; color: var(--primary); font-weight: 600; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .breadcrumb-item:hover { color: var(--secondary); }
+        .breadcrumb-separator { color: #cbd5e0; font-size: 0.8rem; }
+        .breadcrumb-item.active { color: #2d3748; cursor: default; pointer-events: none; }
+
+        /* Modal Body with Custom Scrollbar */
+        .modal-body { 
+            padding: 35px; 
+            overflow-y: auto; 
+            flex: 1; 
+            background: #f8f9fa;
+        }
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: #f1f1f1; }
+        .modal-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: #999; }
+
+        /* Drill List Grid (The Cards inside Modal) */
+        .drill-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .drill-item { 
+            background: #fff; 
+            border: 1px solid #edf2f7; 
+            padding: 25px; 
+            border-radius: 16px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .drill-item:hover { 
+            border-color: var(--primary); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15); 
+        }
+        .drill-content h4 { font-size: 1.1rem; color: #2d3748; margin-bottom: 6px; }
+        .drill-content p { font-size: 0.9rem; color: #718096; }
+        .drill-arrow { color: #cbd5e0; font-size: 1.2rem; transition: 0.2s; }
+        .drill-item:hover .drill-arrow { color: var(--primary); transform: translateX(5px); }
+
+        /* Detail View */
+        .detail-view { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detail-header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
+        .detail-header h2 { color: #2d3748; font-size: 2rem; margin-bottom: 8px; }
+        .detail-header p { color: #718096; font-size: 1.1rem; }
+
+        .detail-card { background: white; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #edf2f7; }
+        .detail-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .info-tag { background: #edf2f7; color: #4a5568; padding: 8px 16px; border-radius: 30px; font-size: 0.9rem; font-weight: 500; transition: 0.2s; }
+        .info-tag:hover { background: #e2e8f0; color: #2d3748; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .modal-content { width: 100%; height: 100%; border-radius: 0; }
+            .drill-list { grid-template-columns: 1fr; }
+            .search-container { width: 100%; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe-americas"></i> Global Career Explorer</h1>
+            <p>15+ Career Streams. 100+ Degrees. Infinite Possibilities.</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="streamSearch" placeholder="Search for Architecture, B.Tech, Law, Fashion...">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterStreams('all')">All</button>
+                <button class="filter-tab" onclick="filterStreams('tech')">Technology</button>
+                <button class="filter-tab" onclick="filterStreams('medical')">Medical</button>
+                <button class="filter-tab" onclick="filterStreams('business')">Business</button>
+                <button class="filter-tab" onclick="filterStreams('arts')">Arts</button>
+                <button class="filter-tab" onclick="filterStreams('law')">Law</button>
+                <button class="filter-tab" onclick="filterStreams('design')">Design</button>
+            </div>
+        </div>
+
+        <div class="streams-grid" id="streamsGrid">
+            </div>
+    </div>
+
+    <div class="modal" id="streamModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2 id="modalTitle">Technology</h2>
+                </div>
+                <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="breadcrumbs" id="breadcrumbs"></div>
+
+            <div class="modal-body" id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. COMPREHENSIVE DATA STRUCTURE (Technology Expanded) ---
+        const masterStreamData = [
+            {
+                id: "tech", 
+                title: "Technology & Engineering", 
+                icon: "fas fa-laptop-code",
+                desc: "Software, AI, Robotics, Core Engineering & Data Science.",
+                degrees: [
+                    {
+                        id: "btech", 
+                        title: "B.Tech / B.E. (Bachelor of Technology)", 
+                        desc: "4-Year Undergraduate Engineering Degree. The most popular route for engineers.",
+                        specializations: [
+                            { title: "Computer Science (CSE)", desc: "Core programming, Algorithms, Web & App Dev.", subjects: ["DSA", "OS", "DBMS", "Networks", "Compiler Design"], careers: ["Software Engineer", "Full Stack Dev", "System Architect"], salary: "₹6L - ₹50L+" },
+                            { title: "Information Technology (IT)", desc: "Application of computing in business & systems.", subjects: ["Web Tech", "Info Security", "Cloud Computing", "E-Commerce"], careers: ["IT Consultant", "Network Admin", "Cloud Engineer"], salary: "₹5L - ₹35L" },
+                            { title: "AI & Machine Learning", desc: "Building intelligent systems & neural networks.", subjects: ["Deep Learning", "NLP", "Python", "Statistics", "Robotics"], careers: ["ML Engineer", "AI Researcher", "Data Scientist"], salary: "₹8L - ₹60L+" },
+                            { title: "Data Science", desc: "Extracting insights from massive datasets.", subjects: ["Big Data", "R/Python", "Visualization", "Predictive Modeling"], careers: ["Data Analyst", "Business Intelligence", "Data Architect"], salary: "₹7L - ₹40L" },
+                            { title: "Cyber Security", desc: "Protecting networks and data from attacks.", subjects: ["Cryptography", "Ethical Hacking", "Network Security", "Forensics"], careers: ["Security Analyst", "Penetration Tester", "CISO"], salary: "₹6L - ₹45L" },
+                            { title: "Electronics & Comm. (ECE)", desc: "Microprocessors, Telecommunication & VLSI.", subjects: ["Digital Circuits", "Signals & Systems", "Embedded Systems"], careers: ["VLSI Engineer", "Telecom Engineer", "IoT Developer"], salary: "₹4.5L - ₹25L" },
+                            { title: "Mechanical Engineering", desc: "Design & manufacturing of physical machines.", subjects: ["Thermodynamics", "Fluid Mechanics", "CAD/CAM", "Robotics"], careers: ["Mechanical Designer", "Automotive Engineer", "Maintenance Eng"], salary: "₹4L - ₹18L" },
+                            { title: "Civil Engineering", desc: "Infrastructure, bridges, roads & buildings.", subjects: ["Structural Analysis", "Surveying", "Geotech", "Concrete Tech"], careers: ["Site Engineer", "Structural Engineer", "Urban Planner"], salary: "₹3.5L - ₹15L" },
+                            { title: "Electrical Engineering (EEE)", desc: "Power systems, circuits & renewable energy.", subjects: ["Power Systems", "Control Systems", "Circuit Theory"], careers: ["Power Engineer", "Grid Manager", "Control Systems Eng"], salary: "₹4L - ₹20L" },
+                            { title: "Aerospace Engineering", desc: "Aircraft & Spacecraft design and mechanics.", subjects: ["Aerodynamics", "Propulsion", "Flight Mechanics"], careers: ["Aero Designer", "Avionics Engineer", "ISRO Scientist"], salary: "₹6L - ₹30L" },
+                            { title: "Biotechnology", desc: "Merging biology with technology.", subjects: ["Genetics", "Microbiology", "Bioinformatics"], careers: ["Biotech Researcher", "Lab Manager", "Pharma R&D"], salary: "₹4L - ₹18L" },
+                            { title: "Chemical Engineering", desc: "Industrial chemical processes & plants.", subjects: ["Heat Transfer", "Fluid Dynamics", "Process Control"], careers: ["Process Engineer", "Plant Manager", "Petrochemical Eng"], salary: "₹5L - ₹22L" }
+                        ]
+                    },
+                    { 
+                        id: "bca", 
+                        title: "BCA (Bachelor of Computer Applications)", 
+                        desc: "3-Year degree focused on software applications & coding.", 
+                        specializations: [
+                            { title: "General BCA", desc: "Core Software Development", subjects: ["Java", "C++", "Web Design", "SQL"], careers: ["Junior Developer", "Tester", "System Admin"], salary: "₹3L - ₹12L" },
+                            { title: "BCA in Data Science", desc: "Specialized in Analytics", subjects: ["Python", "Stats", "Big Data"], careers: ["Junior Data Analyst", "MIS Executive"], salary: "₹4L - ₹15L" },
+                            { title: "BCA in Cloud Computing", desc: "Cloud Infrastructure", subjects: ["AWS", "Azure", "Networking"], careers: ["Cloud Associate", "Server Admin"], salary: "₹4L - ₹18L" }
+                        ] 
+                    },
+                    { 
+                        id: "mtech", 
+                        title: "M.Tech (Master of Technology)", 
+                        desc: "2-Year Postgraduate research-oriented degree.", 
+                        specializations: [
+                            { title: "VLSI Design", desc: "Chip designing & Microelectronics", subjects: ["CMOS", "Verilog", "System on Chip"], careers: ["Chip Architect", "Hardware Engineer"], salary: "₹12L - ₹40L" },
+                            { title: "Thermal Engineering", desc: "Advanced Heat & Energy", subjects: ["Adv Thermodynamics", "Energy Systems"], careers: ["R&D Engineer", "Energy Auditor"], salary: "₹6L - ₹20L" },
+                            { title: "Structural Engineering", desc: "Advanced Civil Structures", subjects: ["Earthquake Eng", "Bridge Design"], careers: ["Senior Structural Consultant"], salary: "₹8L - ₹25L" }
+                        ] 
+                    },
+                    { 
+                        id: "poly", 
+                        title: "Diploma in Engineering (Polytechnic)", 
+                        desc: "3-Year Technical Diploma after 10th Standard.", 
+                        specializations: [
+                            { title: "Diploma in CS", desc: "Basics of Coding", subjects: ["C", "HTML", "Hardware"], careers: ["Support Tech", "Lab Assistant"], salary: "₹2L - ₹6L" },
+                            { title: "Diploma in Mech", desc: "Machine Operations", subjects: ["Workshop Tech", "AutoCAD"], careers: ["Machine Operator", "Junior Engineer"], salary: "₹2.5L - ₹8L" }
+                        ] 
+                    },
+                    {
+                        id: "bsc_it",
+                        title: "B.Sc IT / Computer Science",
+                        desc: "3-Year Science degree with a focus on computing theory.",
+                        specializations: [
+                            { title: "B.Sc CS", desc: "Theoretical Computing", subjects: ["Maths", "Computational Logic", "Programming"], careers: ["Programmer", "Lecturer"], salary: "₹3L - ₹10L" },
+                            { title: "B.Sc IT", desc: "Information Technology", subjects: ["Networking", "Database", "IT Mgmt"], careers: ["IT Support", "Network Technician"], salary: "₹3L - ₹9L" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "medical", title: "Medical & Healthcare", icon: "fas fa-user-md",
+                desc: "Doctors, Surgery, Pharmacy, Nursing & Allied Health.",
+                degrees: [
+                    { id: "mbbs", title: "MBBS", desc: "Bachelor of Medicine", specializations: [{ title: "General Medicine", desc: "Physician" }, { title: "Surgery", desc: "Surgeon" }] },
+                    { id: "bds", title: "BDS", desc: "Dentistry", specializations: [{ title: "Orthodontics", desc: "Dental Specialist" }] },
+                    { id: "bpharma", title: "B.Pharma", desc: "Pharmacy & Drugs", specializations: [{ title: "Clinical Research", desc: "Drug Testing" }] },
+                    { id: "nursing", title: "B.Sc Nursing", desc: "Patient Care", specializations: [{ title: "Critical Care", desc: "ICU Specialist" }] }
+                ]
+            },
+            {
+                id: "business", title: "Business & Management", icon: "fas fa-briefcase",
+                desc: "MBA, Finance, Marketing, HR & Entrepreneurship.",
+                degrees: [
+                    { id: "bba", title: "BBA", desc: "Business Admin", specializations: [{ title: "Marketing", desc: "Sales & Ads" }, { title: "Finance", desc: "Banking & Stocks" }] },
+                    { id: "mba", title: "MBA", desc: "Master of Business", specializations: [{ title: "HR Management", desc: "Talent Acquisition" }, { title: "Operations", desc: "Supply Chain" }] },
+                    { id: "ca", title: "CA / CS", desc: "Chartered Accountancy", specializations: [{ title: "Auditing", desc: "Financial Audit" }] }
+                ]
+            },
+            {
+                id: "arts", title: "Arts & Humanities", icon: "fas fa-feather-alt",
+                desc: "Psychology, History, Literature, Sociology & Pol Science.",
+                degrees: [
+                    { id: "ba", title: "BA (Bachelor of Arts)", desc: "Liberal Arts", specializations: [{ title: "Psychology", desc: "Human Behavior" }, { title: "Economics", desc: "Finance & Policy" }] },
+                    { id: "ma", title: "MA (Master of Arts)", desc: "Advanced Studies", specializations: [{ title: "English Lit", desc: "Literature & Writing" }] }
+                ]
+            },
+            {
+                id: "law", title: "Law & Legal Studies", icon: "fas fa-balance-scale",
+                desc: "Corporate Law, Criminal Law, Judiciary & Litigation.",
+                degrees: [
+                    { id: "llb", title: "LLB", desc: "Bachelor of Laws", specializations: [{ title: "Corporate Law", desc: "Business Legalities" }, { title: "Criminal Law", desc: "Defense & Prosecution" }] },
+                    { id: "llm", title: "LLM", desc: "Master of Laws", specializations: [{ title: "International Law", desc: "Global Relations" }] }
+                ]
+            },
+            {
+                id: "design", title: "Design & Fashion", icon: "fas fa-pencil-ruler",
+                desc: "Graphic Design, Fashion, Interior, UX/UI & Animation.",
+                degrees: [
+                    { id: "bdes", title: "B.Des", desc: "Bachelor of Design", specializations: [{ title: "Fashion Design", desc: "Apparel & Trends" }, { title: "Interior Design", desc: "Space Planning" }, { title: "UX/UI", desc: "Digital Product Design" }] },
+                    { id: "bfa", title: "BFA", desc: "Fine Arts", specializations: [{ title: "Animation", desc: "3D & VFX" }] }
+                ]
+            },
+            {
+                id: "media", title: "Media & Mass Comm", icon: "fas fa-microphone-alt",
+                desc: "Journalism, Film Making, PR, Advertising & Digital Media.",
+                degrees: [
+                    { id: "bjmc", title: "BJMC", desc: "Journalism & Mass Comm", specializations: [{ title: "News Anchoring", desc: "Broadcast Media" }, { title: "Public Relations", desc: "Corporate Comm" }] },
+                    { id: "film", title: "B.Sc Film Making", desc: "Cinema & Direction", specializations: [{ title: "Direction", desc: "Movie Making" }, { title: "Cinematography", desc: "Camera Work" }] }
+                ]
+            },
+            {
+                id: "arch", title: "Architecture & Planning", icon: "fas fa-city",
+                desc: "Building Design, Urban Planning & Landscape Arch.",
+                degrees: [
+                    { id: "barch", title: "B.Arch", desc: "Bachelor of Architecture", specializations: [{ title: "Urban Design", desc: "City Planning" }, { title: "Landscape Arch", desc: "Outdoor Spaces" }] }
+                ]
+            },
+            {
+                id: "aviation", title: "Aviation & Aerospace", icon: "fas fa-plane-departure",
+                desc: "Pilot, Cabin Crew, Airport Mgmt & Maintenance.",
+                degrees: [
+                    { id: "cpl", title: "CPL License", desc: "Commercial Pilot", specializations: [{ title: "Airline Pilot", desc: "Commercial Flying" }] },
+                    { id: "ame", title: "AME", desc: "Aircraft Maintenance", specializations: [{ title: "Avionics", desc: "Aircraft Electronics" }] },
+                    { id: "cabin", title: "Cabin Crew", desc: "Air Hostess/Steward", specializations: [{ title: "In-flight Service", desc: "Hospitality" }] }
+                ]
+            },
+            {
+                id: "hotel", title: "Hotel Mgmt & Tourism", icon: "fas fa-concierge-bell",
+                desc: "Hospitality, Culinary Arts, Travel & Tourism.",
+                degrees: [
+                    { id: "bhm", title: "BHM", desc: "Hotel Management", specializations: [{ title: "Culinary Arts", desc: "Chef Training" }, { title: "F&B Service", desc: "Restaurant Mgmt" }] },
+                    { id: "bttm", title: "BTTM", desc: "Travel & Tourism", specializations: [{ title: "Travel Agency", desc: "Tour Planning" }] }
+                ]
+            },
+            {
+                id: "science", title: "Science & Research", icon: "fas fa-flask",
+                desc: "Physics, Chemistry, Biology, Math & Space Science.",
+                degrees: [
+                    { id: "bsc", title: "B.Sc", desc: "Bachelor of Science", specializations: [{ title: "Physics", desc: "Theoretical Physics" }, { title: "Chemistry", desc: "Organic/Inorganic" }, { title: "Biotech", desc: "Genetics" }] },
+                    { id: "phd", title: "PhD", desc: "Research Doctorate", specializations: [{ title: "Astrophysics", desc: "Space Study" }] }
+                ]
+            },
+            {
+                id: "teaching", title: "Teaching & Education", icon: "fas fa-chalkboard-teacher",
+                desc: "School Teaching, Professor, EdTech & Counseling.",
+                degrees: [
+                    { id: "bed", title: "B.Ed", desc: "Bachelor of Education", specializations: [{ title: "School Teacher", desc: "Primary/Secondary" }] },
+                    { id: "phd_edu", title: "PhD / NET", desc: "College Professor", specializations: [{ title: "Lecturer", desc: "University Teaching" }] }
+                ]
+            },
+            {
+                id: "agri", title: "Agriculture & Food", icon: "fas fa-seedling",
+                desc: "Farming Tech, Food Processing, Dairy & Horticulture.",
+                degrees: [
+                    { id: "bsc_agri", title: "B.Sc Agriculture", desc: "Modern Farming", specializations: [{ title: "Agronomy", desc: "Crop Science" }, { title: "Horticulture", desc: "Plants & Gardens" }] },
+                    { id: "food_tech", title: "B.Tech Food Tech", desc: "Food Processing", specializations: [{ title: "Food Safety", desc: "Quality Control" }] }
+                ]
+            },
+            {
+                id: "defense", title: "Defense & Military", icon: "fas fa-shield-alt",
+                desc: "Army, Navy, Air Force, Police & Paramilitary.",
+                degrees: [
+                    { id: "nda", title: "NDA", desc: "National Defense Academy", specializations: [{ title: "Indian Army", desc: "Ground Forces" }, { title: "Air Force", desc: "Aerial Combat" }, { title: "Navy", desc: "Maritime Operations" }] },
+                    { id: "cds", title: "CDS", desc: "Combined Defense Services", specializations: [{ title: "Officer Training", desc: "Leadership Role" }] }
+                ]
+            },
+            {
+                id: "sports", title: "Sports & Fitness", icon: "fas fa-running",
+                desc: "Athlete, Coach, Sports Mgmt & Physiotherapy.",
+                degrees: [
+                    { id: "bped", title: "B.P.Ed", desc: "Physical Education", specializations: [{ title: "Sports Coach", desc: "Training Athletes" }] },
+                    { id: "sports_mgmt", title: "Sports Management", desc: "Managing Leagues", specializations: [{ title: "Team Manager", desc: "Club Operations" }] }
+                ]
+            }
+        ];
+
+        // --- STATE ---
+        let currentStream = null;
+        let currentDegree = null;
+
+        // --- RENDER LOGIC ---
+        function renderStreams(filterId = 'all') {
+            const grid = document.getElementById('streamsGrid');
+            const filteredData = filterId === 'all' 
+                ? masterStreamData 
+                : masterStreamData.filter(s => s.id === filterId);
+            
+            grid.innerHTML = filteredData.map(stream => `
+                <div class="stream-card" onclick="openStream('${stream.id}')">
+                    <div class="stream-icon-wrapper">
+                        <i class="${stream.icon} stream-icon"></i>
+                    </div>
+                    <div class="stream-info">
+                        <div class="stream-title">${stream.title}</div>
+                        <div class="stream-count">${stream.degrees.length} Path Options</div>
+                        <div class="stream-desc">${stream.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterStreams(id) {
+            document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderStreams(id);
+        }
+
+        function openStream(streamId) {
+            currentStream = masterStreamData.find(s => s.id === streamId);
+            currentDegree = null;
+            document.getElementById('modalTitle').innerHTML = `<i class="${currentStream.icon}"></i> ${currentStream.title}`;
+            document.getElementById('streamModal').classList.add('show');
+            updateBreadcrumbs();
+            renderDegrees(currentStream.degrees);
+        }
+
+        function renderDegrees(degrees) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color:#4a5568; font-size:1.2rem;">Step 1: Choose a Degree or Course</h3>
+                </div>
+                <div class="drill-list">
+                    ${degrees.map(deg => `
+                        <div class="drill-item" onclick="selectDegree('${deg.id}')">
+                            <div class="drill-content">
+                                <h4>${deg.title}</h4>
+                                <p>${deg.desc}</p>
+                            </div>
+                            <i class="fas fa-chevron-right drill-arrow"></i>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectDegree(degreeId) {
+            currentDegree = currentStream.degrees.find(d => d.id === degreeId);
+            updateBreadcrumbs();
+            renderSpecializations(currentDegree.specializations);
+        }
+
+        function renderSpecializations(specs) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color:#4a5568; font-size:1.2rem;">Step 2: Select a Specialization in ${currentDegree.title}</h3>
+                </div>
+                <div class="drill-list">
+                    ${specs.map(spec => `
+                        <div class="drill-item" onclick='showDetails(${JSON.stringify(spec).replace(/'/g, "&apos;")})'>
+                            <div class="drill-content">
+                                <h4>${spec.title}</h4>
+                                <p>${spec.desc}</p>
+                            </div>
+                            <i class="fas fa-arrow-right drill-arrow"></i>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function showDetails(spec) {
+            const body = document.getElementById('modalBody');
+            const subjects = spec.subjects || ["Core Foundations", "Advanced Theory", "Practical Labs", "Industry Projects"];
+            const careers = spec.careers || ["Junior Role", "Senior Specialist", "Consultant", "Manager"];
+            const salary = spec.salary || "₹3.5L - ₹12L / year";
+
+            body.innerHTML = `
+                <div class="detail-view">
+                    <div class="detail-header">
+                        <h2>${spec.title}</h2>
+                        <p>${spec.desc}</p>
+                    </div>
+
+                    <div class="detail-card">
+                        <h3><i class="fas fa-book-open"></i> Key Subjects</h3>
+                        <div class="tag-container">
+                            ${subjects.map(s => `<span class="info-tag">${s}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <h3><i class="fas fa-briefcase"></i> Career Opportunities</h3>
+                        <div class="tag-container">
+                            ${careers.map(c => `<span class="info-tag" style="background:#eef2ff; color:#667eea;">${c}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <h3><i class="fas fa-wallet"></i> Salary Potential</h3>
+                        <p style="font-size: 1.3rem; font-weight: 700; color: #38a169;">${salary}</p>
+                    </div>
+
+                    <button onclick="selectDegree('${currentDegree.id}')" style="margin-top: 10px; padding: 12px 25px; background: #edf2f7; border:none; border-radius: 8px; cursor: pointer; font-weight:600; color:#4a5568; transition:0.2s;">
+                        <i class="fas fa-arrow-left"></i> Back to Specializations
+                    </button>
+                </div>
+            `;
+        }
+
+        function updateBreadcrumbs() {
+            const container = document.getElementById('breadcrumbs');
+            let html = `<div class="breadcrumb-item" onclick="openStream('${currentStream.id}')"><i class="${currentStream.icon}"></i> ${currentStream.title}</div>`;
+            if (currentDegree) {
+                html += `
+                    <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+                    <div class="breadcrumb-item active">${currentDegree.title}</div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function closeModal() {
+            document.getElementById('streamModal').classList.remove('show');
+            setTimeout(() => { currentStream = null; currentDegree = null; }, 300);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('streamModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.getElementById('streamSearch').addEventListener('input', function(e) {
+            const val = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.stream-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(val) ? 'flex' : 'none';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => renderStreams());
+    </script>
+</body>
+</html>
