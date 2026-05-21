@@ -1,152 +1,95 @@
-# 🚀 CareerPath Navigator
+# Future Fit
 
-**Full Stack Career Counseling Platform**
-
-Developed by **Sanjay Yadav** | Student & Aspiring Full Stack Developer | Indore, M.P.
+**A career readiness portal connecting students with mentorship, job resources, and college planning support.**
 
 ---
 
-## 📋 Project Overview
+## Overview
 
-CareerPath Navigator is a comprehensive career counseling platform designed to guide professionals and students in their career journey. As a Full Stack Developer, I've built this platform to provide personalized career guidance, skill assessments, and educational resources.
+Future Fit is a modern web application designed to help students and early-career learners explore career paths, find jobs, and access mentorship resources. The project includes responsive landing pages, a user-friendly navigation system, and a backend-powered authentication layer.
 
-## ✨ Features
+## Features
 
-### 🎯 **Landing Page**
-- **Personal Welcome Screen** with developer profile
-- **Modern Responsive Design** for all devices
-- **Interactive Navigation** with smooth scrolling
-- **Professional Branding** and contact information
+- Responsive, mobile-first layout for learning and career planning pages
+- User authentication and routing support via backend
+- Dedicated career streams for science, commerce, arts, and mentorship
+- College planning and job resources for students
+- Smooth navigation, animations, and interactive UI elements
 
-### 🔐 **User Authentication**
-- **Login Modal** with form validation
-- **Signup Modal** for new users
-- **Responsive Forms** with modern UI
+## Technologies Used
 
-### 🎓 **Career Guidance**
-- **Engineering Stream** - Technical career paths
-- **Medical Stream** - Healthcare career options
-- **Commerce Stream** - Business and finance careers
-- **Arts Stream** - Creative and liberal arts paths
-- **Skill Development** - Programming and technical skills
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Node.js
+- Express.js
 
-### 📱 **Interactive Features**
-- **Mobile-First Design** with hamburger menu
-- **Loading Animations** and smooth transitions
-- **Social Media Integration** (LinkedIn, GitHub, Instagram)
-- **Scroll-to-Top** functionality
-- **Developer Console** messages
-
-## 🛠️ Technologies Used
-
-### **Frontend:**
-- **HTML5** - Semantic markup and structure
-- **CSS3** - Modern styling with Flexbox and Grid
-- **JavaScript (ES6+)** - Interactive functionality and DOM manipulation
-- **Font Awesome** - Professional icons
-- **Google Fonts** - Typography
-
-### **Design Features:**
-- **Responsive Web Design** - Mobile, Tablet, Desktop
-- **CSS Animations** - Smooth transitions and effects
-- **Gradient Backgrounds** - Modern visual appeal
-- **Modal Components** - User-friendly interfaces
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-CareerPath-Navigator/
-├── index.html          # Main HTML file
+Future-Fit/
+├── README.MD
+├── .gitignore
+├── index.html
+├── assessment.html
+├── colleges.html
+├── growth.html
+├── jobs.html
+├── mentorship.html
+├── reset-password.html
+├── streams.html
 ├── css/
-│   └── styles.css      # Complete CSS styling
-├── js/
-│   └── main.js         # JavaScript functionality
+│   └── styles.css
 ├── images/
-│   └── profile.jpg.png # Developer profile picture
-├── README.md           # Project documentation
-└── .gitignore          # Git ignore file
+├── js/
+│   └── main.js
+├── backend/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── server.js
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── utils/
+└── middleware/
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
-### **Prerequisites:**
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Text editor (VS Code recommended)
-- Git installed on your system
+### Prerequisites
 
-### **Installation:**
+- Node.js and npm
+- Git
+- Modern web browser
 
-1. **Clone the repository:**
+### Installation
+
+1. Clone the repository:
 ```bash
-git clone https://github.com/sanjayydv77/CareerPath-Navigator.git
+git clone https://github.com/shivamkumar203/Future-Fit.git
 ```
-
-2. **Navigate to project directory:**
+2. Navigate to the project folder:
 ```bash
-cd CareerPath-Navigator
+cd "Future-Fit - locally perfect"
 ```
-
-3. **Open in VS Code:**
+3. Install backend dependencies:
 ```bash
-code .
+cd backend
+npm install
 ```
+4. Start the backend server:
+```bash
+npm start
+```
+5. Open the frontend files in a browser or use a local web server.
 
-4. **Open index.html in browser or use Live Server extension**
+## Notes
 
-## 📱 Responsive Design
-
-- **Mobile (320px - 768px):** Optimized mobile experience
-- **Tablet (768px - 1024px):** Perfect tablet layout
-- **Desktop (1024px+):** Full desktop experience
-
-## 🎨 Design Features
-
-- **Modern Color Scheme:** Professional gradients and colors
-- **Typography:** Clean, readable fonts
-- **Animations:** Smooth CSS transitions
-- **User Experience:** Intuitive navigation and interactions
-
-## 👨‍💻 About Developer
-
-**Sanjay Yadav**
-- **Role:** Student & Aspiring Full Stack Developer
-- **Education:** 3rd Year CSE B.Tech Student
-- **Location:** Indore, Madhya Pradesh, India
-- **Email:** sanjuydv5357@gmail.com
-- **LinkedIn:** [sanjuydv7](https://www.linkedin.com/in/sanjuydv7/)
-- **GitHub:** [sanjayydv77](https://github.com/sanjayydv77)
-- **Instagram:** [sanjuydv_7](https://www.instagram.com/sanjuydv_7/)
-
-## 🎓 Academic Project
-
-This project is developed as part of my **Final Year B.Tech Project** in Computer Science Engineering, demonstrating:
-
-- **Full Stack Development Skills**
-- **Modern Web Technologies**
-- **Responsive Design Principles**
-- **User Experience Design**
-- **Professional Code Organization**
-
-## 🚀 Future Enhancements
-
-- **Backend Integration** (Node.js, Express.js)
-- **Database Integration** (MongoDB/MySQL)
-- **User Dashboard** and profile management
-- **Career Assessment Tools** and quizzes
-- **Real-time Chat Support**
-- **Admin Panel** for content management
-- **Payment Integration** for premium features
-
-## 📞 Contact & Support
-
-For any queries or suggestions regarding this project:
-
-- **Email:** sanjuydv5357@gmail.com
-- **LinkedIn:** Connect with me for professional discussions
-- **GitHub:** Star this repository if you find it helpful!
+- This repository is set up as a fresh, anonymous project history.
+- The README now reflects the current repository and removes previous personal author details.
 
 ---
 
-⭐ **If you found this project helpful, please give it a star!** ⭐
+## Repository Description
 
-**© 2024 CareerPath Navigator. Developed with ❤️ by Sanjay Yadav | Full Stack Developer | Indore, M.P.**
+Future Fit is a career readiness web application for students seeking mentorship, job guidance, and college planning tools.
